@@ -1,0 +1,249 @@
+{
+	"title": "Complete todas as etapas para finalizar seu cadastro",
+	"subtitles": [],
+	"components": [
+		{
+			"type": "SelectField",
+			"props": {
+				"title": "Tipo de Tributo",
+				"name": "tributo",
+				"data": [
+					{ "label": "ICMS", "value": "1" },
+					{ "label": "IPVA", "value": "2"},
+					{ "label": "ITCD", "value": "3" },
+					{ "label": "Contribuição", "value": "4" },
+					{ "label": "TAXAS", "value": "5" }
+				]
+			}
+		}
+	],
+	"steps": [
+		{
+			"title": "Tipo de Restituição",
+			"subtitles": ["Tipo de Tributo: ICMS"],
+			"components": [
+				{
+					"type": "SelectField",
+					"props": {
+						"title": "Tipo de Restituição",
+						"name": "restituicao",
+						"data": [
+							{ "label": "Restituição de indébito tributário", "value": "1" },
+							{
+								"label": "Ressarcimento do ICMS por diferença de base de cálculo presumida e preço de venda",
+								"value": "2"
+							},
+							{
+								"label": "Homologação de crédito de produtor rural",
+								"value": "3"
+							},
+							{
+								"label": "Alteração de forma de restituição (Crédito para espécie)",
+								"value": "4"
+							}
+						]
+					}
+				}
+			],
+			"steps": [
+				{
+					"title": "Motivo da Restituição",
+					"subtitles": [
+						"Tipo de Tributo: ICMS",
+						"Tipo de Restituição: Restituição de indébito de ICMS"
+					],
+					"components": [
+						{
+							"type": "SelectField",
+							"props": {
+								"title": "Motivo da Restituição",
+								"name": "restituicao",
+								"data": [
+									{
+										"label": "Restituição decorrente de pagamento em duplicidade ou pagamento a maior (Erro da determinação da base de cálculo ou de alíquota)",
+										"value": "1"
+									},
+									{
+										"label": "Restituição decorrente de nota fiscal cancelada ou de devolução",
+										"value": "2"
+									},
+									{
+										"label": "Restituição decorrente de saída interestadual (ICMS/ST)",
+										"value": "3"
+									},
+									{
+										"label": "Restituição decorrente de saída/roubo/sinistro (ICMS/ST)",
+										"value": "4"
+									},
+									{
+										"label": "Restituição decorrente de saída com isenção ou redução de base de cálculo",
+										"value": "5"
+									}
+								]
+							}
+						}
+					],
+					"steps": [
+						{
+							"title": "Motivo da Restituição",
+							"subtitles": [
+								"Tipo de Tributo: ICMS",
+								"Tipo de Restituição: Restituição de indébito de ICMS",
+								"Motivo da Restituição decorrente de pagamento em duplicidade ou pagamento a maior (Erro da determinação da base de cálculo ou de alíquota)"
+							],
+							"components": [
+								{
+									"type": "FileUploadField",
+									"props": {
+										"title": "Chave da nota",
+										"name": "chave-nota",
+										"accept": ".csv"
+									}
+								},
+								{
+									"type": "FileUploadField",
+									"props": {
+										"title": "Nº dos DAEMS",
+										"name": "numeros-daems",
+										"accept": ".csv"
+									}
+								},
+								{
+									"type": "TextInputField",
+									"props": {
+										"title": "CPF",
+										"name": "cpf",
+										"mask": "000.000.000-00",
+										"placeholder": "Digite seu CPF"
+									}
+								},
+								{
+									"type": "SelectField",
+									"props": {
+										"title": "Banco",
+										"name": "banco",
+										"data": [
+											{ "label": "Banco 1", "value": "1" },
+											{
+												"label": "Banco 2",
+												"value": "2"
+											},
+											{
+												"label": "Banco 3",
+												"value": "3"
+											},
+											{
+												"label": "Banco 4",
+												"value": "4"
+											}
+										]
+									}
+								}
+							],
+							"steps": [
+								{
+									"title": "Anexar Documentos",
+									"subtitles": [],
+									"components": [
+										{
+											"type": "FileUploadField",
+											"props": {
+												"title": "Comprovante de Titularidade Bancária (Extrato bancário com Nº da conta e Nº da agência) (Formato .pdf)",
+												"name": "titularidade-bancaria",
+												"accept": ".pdf"
+											}
+										},
+										{
+											"type": "FileUploadField",
+											"props": {
+												"title": "Memória de Cálculo Detalhada do Imposto Pago (Formato .xls)",
+												"name": "memoria-detalhada",
+												"accept": ".xls"
+											}
+										}
+									],
+									"steps": []
+								}
+							]
+						}
+					]
+				},
+				{
+					"title": "Motivo da Restituição",
+					"subtitles": [
+						"Tipo de Tributo: ICMS",
+						"Tipo de Restituição: Ressarcimento do ICMS por diferença de base de cálculo presumida e preço de venda"
+					],
+					"components": [
+						{
+							"type": "TextInputField",
+							"props": {
+								"title": "Valor de restituição (R$)",
+								"name": "valor-restituicao",
+								"type": "number",
+								"currency": true,
+								"placeholder": "520,20"
+							}
+						},
+						{
+							"type": "TextInputField",
+							"props": {
+								"title": "CPF",
+								"name": "cpf",
+								"mask": "000.000.000-00",
+								"placeholder": "Digite seu CPF"
+							}
+						},
+						{
+							"type": "SelectField",
+							"props": {
+								"title": "Banco",
+								"name": "banco",
+								"data": [
+									{ "label": "Banco 1", "value": "1" },
+									{
+										"label": "Banco 2",
+										"value": "2"
+									},
+									{
+										"label": "Banco 3",
+										"value": "3"
+									},
+									{
+										"label": "Banco 4",
+										"value": "4"
+									}
+								]
+							}
+						}
+					],
+					"steps": [
+						{
+							"title": "Anexar Documentos",
+							"subtitles": [],
+							"components": [
+								{
+									"type": "FileUploadField",
+									"props": {
+										"title": "Comprovante de Titularidade Bancária (Extrato bancário com Nº da conta e Nº da agência) (Formato .pdf)",
+										"name": "titularidade-bancaria",
+										"accept": ".pdf"
+									}
+								},
+								{
+									"type": "FileUploadField",
+									"props": {
+										"title": "Memória de Cálculo Detalhada do Imposto Pago (Formato .xls)",
+										"name": "memoria-detalhada",
+										"accept": ".xls"
+									}
+								}
+							],
+							"steps": []
+						}
+					]
+				}
+			]
+		}
+	]
+}
