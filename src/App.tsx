@@ -3,6 +3,8 @@ import ModalContainer from "./components/ModalContainer";
 import { useModalInitializer } from "./hooks/useModalInitializer";
 
 const App = () => {
+  // console.log('renderizando App...');
+  
 	const { openModal } = useModalStore();
 	const { isFetching, isSuccess, isError } = useModalInitializer();
 

@@ -24,6 +24,7 @@ export function DynamicFormLayout({
 	nextStep,
 	closeModal,
 }: DynamicFormLayoutProps) {
+  // console.log('renderizando DynamicFormLayout...');
 	const { handleSubmit, getValues } = useFormContext();
 
 	const onNext = useCallback(() => {

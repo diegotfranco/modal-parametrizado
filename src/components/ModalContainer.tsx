@@ -3,6 +3,7 @@ import { useForm, FormProvider } from "react-hook-form";
 import { DynamicFormLayout } from "./DynamicFormLayout";
 
 export default function ModalContainer() {
+  // console.log('renderizando ModalContainer...');
 	const { isOpen, history, currentStep, prevStep, nextStep, closeModal } =
 		useModalStore();
 

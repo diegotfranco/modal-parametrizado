@@ -13,6 +13,7 @@ export default function FileUploadField({
 	name,
 	accept = ".pdf",
 }: FileUploadFieldProps) {
+  // console.log('renderizando FileUploadField...');
 	const { register, setValue, watch } = useFormContext();
 	const file = watch(name);
 	const [fileName, setFileName] = useState<string>("Nenhum arquivo anexado");

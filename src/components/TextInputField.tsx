@@ -18,6 +18,7 @@ export default function TextInputField({
 	mask,
 	currency = false,
 }: TextInputFieldProps) {
+  // console.log('renderizando TextInputField...');
 	const { control } = useFormContext();
 
 	return (

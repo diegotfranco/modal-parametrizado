@@ -8,6 +8,7 @@ async function fetchModalConfig(): Promise<ModalComponentData> {
 }
 
 export default function useModalConfigQuery() {
+  // console.log('chamando useModalConfigQuery...');
   return useQuery({
     queryKey: ['modal-config'],
     queryFn: fetchModalConfig,

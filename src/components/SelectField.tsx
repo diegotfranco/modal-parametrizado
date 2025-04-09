@@ -12,6 +12,7 @@ export type SelectFieldProps = {
 };
 
 export default function SelectField({ name, title, data }: SelectFieldProps) {
+  // console.log('renderizando SelectField...');
   const { register, setValue, watch } = useFormContext();
   const selectedValue = watch(name);
 

@@ -11,6 +11,7 @@ export type FieldRendererProps = {
 };
 
 export function FieldRenderer({ type, props }: FieldRendererProps) {
+  // console.log('renderizando FieldRenderer...');
 	const form = useFormContext();
 
 	const Component = registry[type];
