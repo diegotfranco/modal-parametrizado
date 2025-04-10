@@ -9,7 +9,7 @@
 				"name": "tributo",
 				"data": [
 					{ "label": "ICMS", "value": "1" },
-					{ "label": "IPVA", "value": "2"},
+					{ "label": "IPVA", "value": "2" },
 					{ "label": "ITCD", "value": "3" },
 					{ "label": "Contribuição", "value": "4" },
 					{ "label": "TAXAS", "value": "5" }
@@ -93,10 +93,17 @@
 							],
 							"components": [
 								{
+									"type": "AlertField",
+									"props": {
+										"type": "warning",
+										"text": "Para inserir vários documentos, use a opção de \"Baixar modelo\". Preencha o modelo e o envie por meio do botão \"Enviar Arquivo .CSV\""
+									}
+								},
+								{
 									"type": "FileUploadField",
 									"props": {
 										"title": "Chave da nota",
-										"name": "chave-nota",
+										"name": "chave-notas",
 										"accept": ".csv"
 									}
 								},
@@ -104,17 +111,34 @@
 									"type": "FileUploadField",
 									"props": {
 										"title": "Nº dos DAEMS",
-										"name": "numeros-daems",
+										"name": "numero-daems",
 										"accept": ".csv"
 									}
 								},
 								{
 									"type": "TextInputField",
 									"props": {
-										"title": "CPF",
-										"name": "cpf",
-										"mask": "000.000.000-00",
-										"placeholder": "Digite seu CPF"
+										"title": "Valor de restituição (R$)",
+										"name": "valor-restituicao",
+										"type": "number",
+										"currency": true,
+										"placeholder": "520,20"
+									}
+								},
+								{
+									"type": "TextInputField",
+									"props": {
+										"title": "Referência Inicial",
+										"name": "referencia-inicial",
+										"type": "date"
+									}
+								},
+								{
+									"type": "TextInputField",
+									"props": {
+										"title": "Referência Final",
+										"name": "referencia-final",
+										"type": "date"
 									}
 								},
 								{
@@ -123,20 +147,63 @@
 										"title": "Banco",
 										"name": "banco",
 										"data": [
-											{ "label": "Banco 1", "value": "1" },
 											{
-												"label": "Banco 2",
-												"value": "2"
+												"label": "Banco do Brasil S.A.",
+												"value": "001"
 											},
 											{
-												"label": "Banco 3",
-												"value": "3"
+												"label": "Banco Santander (Brasil) S.A.",
+												"value": "033"
 											},
 											{
-												"label": "Banco 4",
-												"value": "4"
+												"label": "Banco Inter S.A.",
+												"value": "077"
+											},
+											{
+												"label": "Caixa Econômica Federal",
+												"value": "104"
+											},
+											{
+												"label": "Banco Bradesco S.A.",
+												"value": "237"
+											},
+											{
+												"label": "Nu Pagamentos S.A.",
+												"value": "260"
+											},
+											{
+												"label": "Banco C6 S.A.",
+												"value": "336"
+											},
+											{
+												"label": "Itaú Unibanco S.A.",
+												"value": "341"
 											}
 										]
+									}
+								},
+								{
+									"type": "TextInputField",
+									"props": {
+										"title": "AG",
+										"name": "agencia-bancaria",
+										"mask": "0000-0",
+										"placeholder": "Digite o número da agência"
+									}
+								},
+								{
+									"type": "TextInputField",
+									"props": {
+										"title": "Conta Bancária",
+										"name": "conta-bancaria",
+										"mask": "00000000-0",
+										"placeholder": "Digite o número da conta"
+									}
+								},
+								{
+									"type": "TextAreaField",
+									"props": {
+										"placeholder": "Lorem Ipsum x10"
 									}
 								}
 							],
@@ -162,7 +229,732 @@
 											}
 										}
 									],
-									"steps": []
+									"steps": [
+										{
+											"title": "",
+											"subtitles": [],
+											"components": [
+												{
+													"type": "TextDisplayField",
+													"props": {
+														"title": "Resumo da Restituição",
+														"name": "resumo-restituicao"
+													}
+												},
+												{
+													"type": "TextDisplayField",
+													"props": {
+														"title": "Dados Bancários",
+														"name": "dados-bancarios"
+													}
+												},
+												{
+													"type": "TextDisplayField",
+													"props": {
+														"title": "Requerimento",
+														"name": "requerimento"
+													}
+												}
+											],
+											"steps": []
+										}
+									]
+								}
+							]
+						},
+						{
+							"title": "Motivo da Restituição",
+							"subtitles": [
+								"Tipo de Tributo: ICMS",
+								"Tipo de Restituição: Restituição de indébito de ICMS",
+								"Motivo da Restituição: Restituição decorrente de nota fiscal cancelada ou de devolução"
+							],
+							"components": [
+								{
+									"type": "AlertField",
+									"props": {
+										"type": "warning",
+										"text": "Para inserir vários documentos, use a opção de \"Baixar modelo\". Preencha o modelo e o envie por meio do botão \"Enviar Arquivo .CSV\""
+									}
+								},
+								{
+									"type": "FileUploadField",
+									"props": {
+										"title": "Chave da nota fiscal e chave do CT-e ou MDF-e (no caso de devolução)",
+										"name": "chave-notas",
+										"accept": ".csv"
+									}
+								},
+								{
+									"type": "FileUploadField",
+									"props": {
+										"title": "Nº dos DAEMS",
+										"name": "numero-daems",
+										"accept": ".csv"
+									}
+								},
+								{
+									"type": "TextInputField",
+									"props": {
+										"title": "Valor de restituição (R$)",
+										"name": "valor-restituicao",
+										"type": "number",
+										"currency": true,
+										"placeholder": "520,20"
+									}
+								},
+								{
+									"type": "TextInputField",
+									"props": {
+										"title": "Referência Inicial",
+										"name": "referencia-inicial",
+										"type": "date"
+									}
+								},
+								{
+									"type": "TextInputField",
+									"props": {
+										"title": "Referência Final",
+										"name": "referencia-final",
+										"type": "date"
+									}
+								},
+								{
+									"type": "SelectField",
+									"props": {
+										"title": "Banco",
+										"name": "banco",
+										"data": [
+											{
+												"label": "Banco do Brasil S.A.",
+												"value": "001"
+											},
+											{
+												"label": "Banco Santander (Brasil) S.A.",
+												"value": "033"
+											},
+											{
+												"label": "Banco Inter S.A.",
+												"value": "077"
+											},
+											{
+												"label": "Caixa Econômica Federal",
+												"value": "104"
+											},
+											{
+												"label": "Banco Bradesco S.A.",
+												"value": "237"
+											},
+											{
+												"label": "Nu Pagamentos S.A.",
+												"value": "260"
+											},
+											{
+												"label": "Banco C6 S.A.",
+												"value": "336"
+											},
+											{
+												"label": "Itaú Unibanco S.A.",
+												"value": "341"
+											}
+										]
+									}
+								},
+								{
+									"type": "TextInputField",
+									"props": {
+										"title": "AG",
+										"name": "agencia-bancaria",
+										"mask": "0000-0",
+										"placeholder": "Digite o número da agência"
+									}
+								},
+								{
+									"type": "TextInputField",
+									"props": {
+										"title": "Conta Bancária",
+										"name": "conta-bancaria",
+										"mask": "00000000-0",
+										"placeholder": "Digite o número da conta"
+									}
+								},
+								{
+									"type": "TextAreaField",
+									"props": {
+										"placeholder": "Lorem Ipsum x10"
+									}
+								}
+							],
+							"steps": [
+								{
+									"title": "Anexar Documentos",
+									"subtitles": [],
+									"components": [
+										{
+											"type": "FileUploadField",
+											"props": {
+												"title": "Comprovante de Titularidade Bancária (Extrato bancário com Nº da conta e Nº da agência) (Formato .pdf)",
+												"name": "titularidade-bancaria",
+												"accept": ".pdf"
+											}
+										}
+									],
+									"steps": [
+										{
+											"title": "",
+											"subtitles": [],
+											"components": [
+												{
+													"type": "TextDisplayField",
+													"props": {
+														"title": "Resumo da Restituição",
+														"name": "resumo-restituicao"
+													}
+												},
+												{
+													"type": "TextDisplayField",
+													"props": {
+														"title": "Dados Bancários",
+														"name": "dados-bancarios"
+													}
+												},
+												{
+													"type": "TextDisplayField",
+													"props": {
+														"title": "Requerimento",
+														"name": "requerimento"
+													}
+												}
+											],
+											"steps": []
+										}
+									]
+								}
+							]
+						},
+						{
+							"title": "Motivo da Restituição",
+							"subtitles": [
+								"Tipo de Tributo: ICMS",
+								"Tipo de Restituição: Restituição de indébito de ICMS",
+								"Motivo da Restituição: Restituição decorrente de saída interestadual (ICMS/ST)"
+							],
+							"components": [
+								{
+									"type": "AlertField",
+									"props": {
+										"type": "warning",
+										"text": "Para inserir vários documentos, use a opção de \"Baixar modelo\". Preencha o modelo e o envie por meio do botão \"Enviar Arquivo .CSV\""
+									}
+								},
+								{
+									"type": "FileUploadField",
+									"props": {
+										"title": "Chave das notas de entrada e saída",
+										"name": "chave-notas",
+										"accept": ".csv"
+									}
+								},
+								{
+									"type": "FileUploadField",
+									"props": {
+										"title": "Nº dos DAEMS (Conforme consta na planilha 1 do anexo II)",
+										"name": "numero-daems",
+										"accept": ".csv"
+									}
+								},
+								{
+									"type": "TextInputField",
+									"props": {
+										"title": "Valor de restituição (R$)",
+										"name": "valor-restituicao",
+										"type": "number",
+										"currency": true,
+										"placeholder": "520,20"
+									}
+								},
+								{
+									"type": "TextInputField",
+									"props": {
+										"title": "Referência Inicial",
+										"name": "referencia-inicial",
+										"type": "date"
+									}
+								},
+								{
+									"type": "TextInputField",
+									"props": {
+										"title": "Referência Final",
+										"name": "referencia-final",
+										"type": "date"
+									}
+								},
+								{
+									"type": "SelectField",
+									"props": {
+										"title": "Banco",
+										"name": "banco",
+										"data": [
+											{
+												"label": "Banco do Brasil S.A.",
+												"value": "001"
+											},
+											{
+												"label": "Banco Santander (Brasil) S.A.",
+												"value": "033"
+											},
+											{
+												"label": "Banco Inter S.A.",
+												"value": "077"
+											},
+											{
+												"label": "Caixa Econômica Federal",
+												"value": "104"
+											},
+											{
+												"label": "Banco Bradesco S.A.",
+												"value": "237"
+											},
+											{
+												"label": "Nu Pagamentos S.A.",
+												"value": "260"
+											},
+											{
+												"label": "Banco C6 S.A.",
+												"value": "336"
+											},
+											{
+												"label": "Itaú Unibanco S.A.",
+												"value": "341"
+											}
+										]
+									}
+								},
+								{
+									"type": "TextInputField",
+									"props": {
+										"title": "AG",
+										"name": "agencia-bancaria",
+										"mask": "0000-0",
+										"placeholder": "Digite o número da agência"
+									}
+								},
+								{
+									"type": "TextInputField",
+									"props": {
+										"title": "Conta Bancária",
+										"name": "conta-bancaria",
+										"mask": "00000000-0",
+										"placeholder": "Digite o número da conta"
+									}
+								},
+								{
+									"type": "TextAreaField",
+									"props": {
+										"placeholder": "Lorem Ipsum x10"
+									}
+								}
+							],
+							"steps": [
+								{
+									"title": "Anexar Documentos",
+									"subtitles": [],
+									"components": [
+										{
+											"type": "FileUploadField",
+											"props": {
+												"title": "Comprovante de saída da mercadoria do território (EFD Destinatário) (Formato .pdf)",
+												"name": "comprovante-saida-mercadoria",
+												"accept": ".pdf"
+											}
+										},
+										{
+											"type": "FileUploadField",
+											"props": {
+												"title": "Comprovante de Titularidade Bancária (Extrato bancário com Nº da conta e Nº da agência) (Formato .pdf)",
+												"name": "titularidade-bancaria",
+												"accept": ".pdf"
+											}
+										}
+									],
+									"steps": [
+										{
+											"title": "",
+											"subtitles": [],
+											"components": [
+												{
+													"type": "TextDisplayField",
+													"props": {
+														"title": "Resumo da Restituição",
+														"name": "resumo-restituicao"
+													}
+												},
+												{
+													"type": "TextDisplayField",
+													"props": {
+														"title": "Dados Bancários",
+														"name": "dados-bancarios"
+													}
+												},
+												{
+													"type": "TextDisplayField",
+													"props": {
+														"title": "Requerimento",
+														"name": "requerimento"
+													}
+												}
+											],
+											"steps": []
+										}
+									]
+								}
+							]
+						},
+						{
+							"title": "Motivo da Restituição",
+							"subtitles": [
+								"Tipo de Tributo: ICMS",
+								"Tipo de Restituição: Restituição de indébito de ICMS",
+								"Motivo da Restituição: Restituição decorrente de saída/roubo/sinistro (ICMS/ST)"
+							],
+							"components": [
+								{
+									"type": "AlertField",
+									"props": {
+										"type": "warning",
+										"text": "Para inserir vários documentos, use a opção de \"Baixar modelo\". Preencha o modelo e o envie por meio do botão \"Enviar Arquivo .CSV\""
+									}
+								},
+								{
+									"type": "FileUploadField",
+									"props": {
+										"title": "Chave das notas de entrada",
+										"name": "chave-notas",
+										"accept": ".csv"
+									}
+								},
+								{
+									"type": "TextInputField",
+									"props": {
+										"title": "Valor de restituição (R$)",
+										"name": "valor-restituicao",
+										"type": "number",
+										"currency": true,
+										"placeholder": "520,20"
+									}
+								},
+								{
+									"type": "TextInputField",
+									"props": {
+										"title": "Referência Inicial",
+										"name": "referencia-inicial",
+										"type": "date"
+									}
+								},
+								{
+									"type": "TextInputField",
+									"props": {
+										"title": "Referência Final",
+										"name": "referencia-final",
+										"type": "date"
+									}
+								},
+								{
+									"type": "SelectField",
+									"props": {
+										"title": "Banco",
+										"name": "banco",
+										"data": [
+											{
+												"label": "Banco do Brasil S.A.",
+												"value": "001"
+											},
+											{
+												"label": "Banco Santander (Brasil) S.A.",
+												"value": "033"
+											},
+											{
+												"label": "Banco Inter S.A.",
+												"value": "077"
+											},
+											{
+												"label": "Caixa Econômica Federal",
+												"value": "104"
+											},
+											{
+												"label": "Banco Bradesco S.A.",
+												"value": "237"
+											},
+											{
+												"label": "Nu Pagamentos S.A.",
+												"value": "260"
+											},
+											{
+												"label": "Banco C6 S.A.",
+												"value": "336"
+											},
+											{
+												"label": "Itaú Unibanco S.A.",
+												"value": "341"
+											}
+										]
+									}
+								},
+								{
+									"type": "TextInputField",
+									"props": {
+										"title": "AG",
+										"name": "agencia-bancaria",
+										"mask": "0000-0",
+										"placeholder": "Digite o número da agência"
+									}
+								},
+								{
+									"type": "TextInputField",
+									"props": {
+										"title": "Conta Bancária",
+										"name": "conta-bancaria",
+										"mask": "00000000-0",
+										"placeholder": "Digite o número da conta"
+									}
+								},
+								{
+									"type": "TextAreaField",
+									"props": {
+										"placeholder": "Lorem Ipsum x10"
+									}
+								}
+							],
+							"steps": [
+								{
+									"title": "Anexar Documentos",
+									"subtitles": [],
+									"components": [
+										{
+											"type": "FileUploadField",
+											"props": {
+												"title": "Comprovante de Titularidade Bancária (Extrato bancário com Nº da conta e Nº da agência) (Formato .pdf)",
+												"name": "titularidade-bancaria",
+												"accept": ".pdf"
+											}
+										},
+										{
+											"type": "FileUploadField",
+											"props": {
+												"title": "Boletim de ocorrência ou Comprovante de indenização de seguradora (Formato .pdf)",
+												"name": "boletim-ou-comprovante",
+												"accept": ".pdf"
+											}
+										},
+										{
+											"type": "FileUploadField",
+											"props": {
+												"title": "Outros documentos comprobatórios (Formato .pdf)",
+												"name": "documentos-comprobatorios",
+												"accept": ".pdf"
+											}
+										}
+									],
+									"steps": [
+										{
+											"title": "",
+											"subtitles": [],
+											"components": [
+												{
+													"type": "TextDisplayField",
+													"props": {
+														"title": "Resumo da Restituição",
+														"name": "resumo-restituicao"
+													}
+												},
+												{
+													"type": "TextDisplayField",
+													"props": {
+														"title": "Dados Bancários",
+														"name": "dados-bancarios"
+													}
+												},
+												{
+													"type": "TextDisplayField",
+													"props": {
+														"title": "Requerimento",
+														"name": "requerimento"
+													}
+												}
+											],
+											"steps": []
+										}
+									]
+								}
+							]
+						},
+						{
+							"title": "Motivo da Restituição",
+							"subtitles": [
+								"Tipo de Tributo: ICMS",
+								"Tipo de Restituição: Restituição de indébito de ICMS",
+								"Motivo da Restituição: Restituição decorrente de saída com isenção ou redução de base de cálculo."
+							],
+							"components": [
+								{
+									"type": "AlertField",
+									"props": {
+										"type": "warning",
+										"text": "Para inserir vários documentos, use a opção de \"Baixar modelo\". Preencha o modelo e o envie por meio do botão \"Enviar Arquivo .CSV\""
+									}
+								},
+								{
+									"type": "FileUploadField",
+									"props": {
+										"title": "Chave das notas deentrada e saída",
+										"name": "chave-notas",
+										"accept": ".csv"
+									}
+								},
+								{
+									"type": "FileUploadField",
+									"props": {
+										"title": "Nº dos DAEMS",
+										"name": "numero-daems",
+										"accept": ".csv"
+									}
+								},
+								{
+									"type": "TextInputField",
+									"props": {
+										"title": "Valor de restituição (R$)",
+										"name": "valor-restituicao",
+										"type": "number",
+										"currency": true,
+										"placeholder": "520,20"
+									}
+								},
+								{
+									"type": "TextInputField",
+									"props": {
+										"title": "Referência Inicial",
+										"name": "referencia-inicial",
+										"type": "date"
+									}
+								},
+								{
+									"type": "TextInputField",
+									"props": {
+										"title": "Referência Final",
+										"name": "referencia-final",
+										"type": "date"
+									}
+								},
+								{
+									"type": "SelectField",
+									"props": {
+										"title": "Banco",
+										"name": "banco",
+										"data": [
+											{
+												"label": "Banco do Brasil S.A.",
+												"value": "001"
+											},
+											{
+												"label": "Banco Santander (Brasil) S.A.",
+												"value": "033"
+											},
+											{
+												"label": "Banco Inter S.A.",
+												"value": "077"
+											},
+											{
+												"label": "Caixa Econômica Federal",
+												"value": "104"
+											},
+											{
+												"label": "Banco Bradesco S.A.",
+												"value": "237"
+											},
+											{
+												"label": "Nu Pagamentos S.A.",
+												"value": "260"
+											},
+											{
+												"label": "Banco C6 S.A.",
+												"value": "336"
+											},
+											{
+												"label": "Itaú Unibanco S.A.",
+												"value": "341"
+											}
+										]
+									}
+								},
+								{
+									"type": "TextInputField",
+									"props": {
+										"title": "AG",
+										"name": "agencia-bancaria",
+										"mask": "0000-0",
+										"placeholder": "Digite o número da agência"
+									}
+								},
+								{
+									"type": "TextInputField",
+									"props": {
+										"title": "Conta Bancária",
+										"name": "conta-bancaria",
+										"mask": "00000000-0",
+										"placeholder": "Digite o número da conta"
+									}
+								},
+								{
+									"type": "TextAreaField",
+									"props": {
+										"placeholder": "Lorem Ipsum x10"
+									}
+								}
+							],
+							"steps": [
+								{
+									"title": "Anexar Documentos",
+									"subtitles": [],
+									"components": [
+										{
+											"type": "FileUploadField",
+											"props": {
+												"title": "Comprovante de Titularidade Bancária (Extrato bancário com Nº da conta e Nº da agência) (Formato .pdf)",
+												"name": "titularidade-bancaria",
+												"accept": ".pdf"
+											}
+										}
+									],
+									"steps": [
+										{
+											"title": "",
+											"subtitles": [],
+											"components": [
+												{
+													"type": "TextDisplayField",
+													"props": {
+														"title": "Resumo da Restituição",
+														"name": "resumo-restituicao"
+													}
+												},
+												{
+													"type": "TextDisplayField",
+													"props": {
+														"title": "Dados Bancários",
+														"name": "dados-bancarios"
+													}
+												},
+												{
+													"type": "TextDisplayField",
+													"props": {
+														"title": "Requerimento",
+														"name": "requerimento"
+													}
+												}
+											],
+											"steps": []
+										}
+									]
 								}
 							]
 						}
@@ -188,10 +980,17 @@
 						{
 							"type": "TextInputField",
 							"props": {
-								"title": "CPF",
-								"name": "cpf",
-								"mask": "000.000.000-00",
-								"placeholder": "Digite seu CPF"
+								"title": "Referência Inicial",
+								"name": "referencia-inicial",
+								"type": "date"
+							}
+						},
+						{
+							"type": "TextInputField",
+							"props": {
+								"title": "Referência Final",
+								"name": "referencia-final",
+								"type": "date"
 							}
 						},
 						{
@@ -200,23 +999,823 @@
 								"title": "Banco",
 								"name": "banco",
 								"data": [
-									{ "label": "Banco 1", "value": "1" },
 									{
-										"label": "Banco 2",
-										"value": "2"
+										"label": "Banco do Brasil S.A.",
+										"value": "001"
 									},
 									{
-										"label": "Banco 3",
-										"value": "3"
+										"label": "Banco Santander (Brasil) S.A.",
+										"value": "033"
 									},
 									{
-										"label": "Banco 4",
-										"value": "4"
+										"label": "Banco Inter S.A.",
+										"value": "077"
+									},
+									{
+										"label": "Caixa Econômica Federal",
+										"value": "104"
+									},
+									{
+										"label": "Banco Bradesco S.A.",
+										"value": "237"
+									},
+									{
+										"label": "Nu Pagamentos S.A.",
+										"value": "260"
+									},
+									{
+										"label": "Banco C6 S.A.",
+										"value": "336"
+									},
+									{
+										"label": "Itaú Unibanco S.A.",
+										"value": "341"
 									}
 								]
 							}
+						},
+						{
+							"type": "TextInputField",
+							"props": {
+								"title": "AG",
+								"name": "agencia-bancaria",
+								"mask": "0000-0",
+								"placeholder": "Digite o número da agência"
+							}
+						},
+						{
+							"type": "TextInputField",
+							"props": {
+								"title": "Conta Bancária",
+								"name": "conta-bancaria",
+								"mask": "00000000-0",
+								"placeholder": "Digite o número da conta"
+							}
+						},
+						{
+							"type": "TextAreaField",
+							"props": {
+								"placeholder": "Lorem Ipsum x10"
+							}
 						}
 					],
+					"steps": [
+						{
+							"title": "Anexar Documentos",
+							"subtitles": [],
+							"components": [
+								{
+									"type": "AlertField",
+									"props": {
+										"type": "info",
+										"text": "Para este pedido de restituição acesse o sistema do ESAP em https://eservicos.sefaz.ms.gov.br"
+									}
+								}
+							],
+							"steps": [
+								{
+									"title": "",
+									"subtitles": [],
+									"components": [
+										{
+											"type": "TextDisplayField",
+											"props": {
+												"title": "Resumo da Restituição",
+												"name": "resumo-restituicao"
+											}
+										},
+										{
+											"type": "TextDisplayField",
+											"props": {
+												"title": "Dados Bancários",
+												"name": "dados-bancarios"
+											}
+										},
+										{
+											"type": "TextDisplayField",
+											"props": {
+												"title": "Requerimento",
+												"name": "requerimento"
+											}
+										}
+									],
+									"steps": []
+								}
+							]
+						}
+					]
+				},
+				{
+					"title": "Motivo da Restituição",
+					"subtitles": [
+						"Tipo de Tributo: ICMS",
+						"Tipo de Restituição: Homologação de crédito de produtor rural"
+					],
+					"components": [
+						{
+							"type": "AlertField",
+							"props": {
+								"type": "info",
+								"text": "Para este pedido de restituição acesse o sistema do CREFIR em https://eservicos.sefaz.ms.gov.br"
+							}
+						}
+					],
+					"steps": []
+				},
+				{
+					"title": "Motivo da Restituição",
+					"subtitles": [
+						"Tipo de Tributo: ICMS",
+						"Tipo de Restituição: Alteração de forma de restituição (Crédito para espécie)"
+					],
+					"components": [
+						{
+							"type": "AlertField",
+							"props": {
+								"type": "warning",
+								"text": "Para inserir vários documentos, use a opção de \"Baixar modelo\". Preencha o modelo e o envie por meio do botão \"Enviar Arquivo .CSV\""
+							}
+						},
+						{
+							"type": "TextInputField",
+							"props": {
+								"title": "E-SAP",
+								"name": "esap"
+							}
+						},
+						{
+							"type": "TextInputField",
+							"props": {
+								"title": "Valor de restituição (R$)",
+								"name": "valor-restituicao",
+								"type": "number",
+								"currency": true,
+								"placeholder": "520,20"
+							}
+						},
+						{
+							"type": "SelectField",
+							"props": {
+								"title": "Banco",
+								"name": "banco",
+								"data": [
+									{
+										"label": "Banco do Brasil S.A.",
+										"value": "001"
+									},
+									{
+										"label": "Banco Santander (Brasil) S.A.",
+										"value": "033"
+									},
+									{
+										"label": "Banco Inter S.A.",
+										"value": "077"
+									},
+									{
+										"label": "Caixa Econômica Federal",
+										"value": "104"
+									},
+									{
+										"label": "Banco Bradesco S.A.",
+										"value": "237"
+									},
+									{
+										"label": "Nu Pagamentos S.A.",
+										"value": "260"
+									},
+									{
+										"label": "Banco C6 S.A.",
+										"value": "336"
+									},
+									{
+										"label": "Itaú Unibanco S.A.",
+										"value": "341"
+									}
+								]
+							}
+						},
+						{
+							"type": "TextInputField",
+							"props": {
+								"title": "AG",
+								"name": "agencia-bancaria",
+								"mask": "0000-0",
+								"placeholder": "Digite o número da agência"
+							}
+						},
+						{
+							"type": "TextInputField",
+							"props": {
+								"title": "Conta Bancária",
+								"name": "conta-bancaria",
+								"mask": "00000000-0",
+								"placeholder": "Digite o número da conta"
+							}
+						},
+						{
+							"type": "TextAreaField",
+							"props": {
+								"placeholder": "Lorem Ipsum x10"
+							}
+						}
+					],
+					"steps": [
+						{
+							"title": "Pedido de Restituição",
+							"subtitles": ["Motivo da Restituição"],
+							"components": [],
+							"steps": [
+								{
+									"title": "Anexar Documentos",
+									"subtitles": [],
+									"components": [
+										{
+											"type": "FileUploadField",
+											"props": {
+												"title": "Comprovante de Titularidade Bancária (Extrato bancário com Nº da conta e Nº da agência) (Formato .pdf)",
+												"name": "titularidade-bancaria",
+												"accept": ".pdf"
+											}
+										}
+									],
+									"steps": [
+										{
+											"title": "",
+											"subtitles": [],
+											"components": [
+												{
+													"type": "TextDisplayField",
+													"props": {
+														"title": "Resumo da Restituição",
+														"name": "resumo-restituicao"
+													}
+												},
+												{
+													"type": "TextDisplayField",
+													"props": {
+														"title": "Dados Bancários",
+														"name": "dados-bancarios"
+													}
+												},
+												{
+													"type": "TextDisplayField",
+													"props": {
+														"title": "Requerimento",
+														"name": "requerimento"
+													}
+												}
+											],
+											"steps": []
+										}
+									]
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"title": "Tipo de Restituição",
+			"subtitles": ["Tipo de Tributo: IPVA"],
+			"components": [
+				{
+					"type": "MultiInputField",
+					"props": {
+						"components": [
+							{
+								"type": "TextInputField",
+								"props": {
+									"title": "Placa do veículo",
+									"name": "placa-veiculo",
+									"placeholder": "Inserir"
+								}
+							},
+							{
+								"type": "TextInputField",
+								"props": {
+									"title": "RENAVAM",
+									"name": "renavam",
+									"placeholder": "Inserir"
+								}
+							},
+							{
+								"type": "TextInputField",
+								"props": {
+									"title": "Ano de pagamento",
+									"name": "ano-pagemento",
+									"mask": "0000",
+									"placeholder": "2022"
+								}
+							},
+							{
+								"type": "SelectField",
+								"props": {
+									"title": "Exercício do pagamento",
+									"name": "exercicio-pagamento",
+									"data": [
+										{
+											"label": "2022",
+											"value": "2022"
+										},
+										{
+											"label": "2023",
+											"value": "2023"
+										},
+										{
+											"label": "2024",
+											"value": "2024"
+										},
+										{
+											"label": "2025",
+											"value": "2025"
+										}
+									]
+								}
+							}
+						]
+					}
+				},
+				{
+					"type": "SelectField",
+					"props": {
+						"title": "Descrição do Pedido de Restituição",
+						"name": "descricao-pedido",
+						"data": [
+							{
+								"label": "Pedido de Restituição por pagamento indevido",
+								"value": "pagamento-indevido"
+							},
+							{
+								"label": "Pedido de Restituição por erro de cálculo",
+								"value": "erro-calculo"
+							},
+							{
+								"label": "Pedido de Restituição por duplicidade de pagamento",
+								"value": "duplicidade-pagamento"
+							}
+						]
+					}
+				},
+				{
+					"type": "SelectField",
+					"props": {
+						"title": "Banco",
+						"name": "banco",
+						"data": [
+							{
+								"label": "Banco do Brasil S.A.",
+								"value": "001"
+							},
+							{
+								"label": "Banco Santander (Brasil) S.A.",
+								"value": "033"
+							},
+							{
+								"label": "Banco Inter S.A.",
+								"value": "077"
+							},
+							{
+								"label": "Caixa Econômica Federal",
+								"value": "104"
+							},
+							{
+								"label": "Banco Bradesco S.A.",
+								"value": "237"
+							},
+							{
+								"label": "Nu Pagamentos S.A.",
+								"value": "260"
+							},
+							{
+								"label": "Banco C6 S.A.",
+								"value": "336"
+							},
+							{
+								"label": "Itaú Unibanco S.A.",
+								"value": "341"
+							}
+						]
+					}
+				},
+				{
+					"type": "TextInputField",
+					"props": {
+						"title": "AG",
+						"name": "agencia-bancaria",
+						"mask": "0000-0",
+						"placeholder": "Digite o número da agência"
+					}
+				},
+				{
+					"type": "TextInputField",
+					"props": {
+						"title": "Conta Bancária",
+						"name": "conta-bancaria",
+						"mask": "00000000-0",
+						"placeholder": "Digite o número da conta"
+					}
+				},
+				{
+					"type": "TextAreaField",
+					"props": {
+						"placeholder": "Lorem Ipsum x10"
+					}
+				}
+			],
+			"steps": [
+				{
+					"title": "Pedido de Restituição",
+					"subtitles": ["Motivo da Restituição"],
+					"components": [],
+					"steps": [
+						{
+							"title": "Anexar Documentos IPVA",
+							"subtitles": [],
+							"components": [
+								{
+									"type": "FileUploadField",
+									"props": {
+										"title": "Comprovante de Titularidade Bancária (Extrato bancário com Nº da conta e Nº da agência) (Formato .pdf)",
+										"name": "titularidade-bancaria-ipva",
+										"accept": ".pdf"
+									}
+								},
+								{
+									"type": "FileUploadField",
+									"props": {
+										"title": "CRLV-e (Formato .pdf)",
+										"name": "crlv-e-ipva",
+										"accept": ".xls"
+									}
+								}
+							],
+							"steps": [
+								{
+									"title": "",
+									"subtitles": [],
+									"components": [
+										{
+											"type": "TextDisplayField",
+											"props": {
+												"title": "Resumo da Restituição",
+												"name": "resumo-restituicao"
+											}
+										},
+										{
+											"type": "TextDisplayField",
+											"props": {
+												"title": "Dados Bancários",
+												"name": "dados-bancarios"
+											}
+										},
+										{
+											"type": "TextDisplayField",
+											"props": {
+												"title": "Requerimento",
+												"name": "requerimento"
+											}
+										}
+									],
+									"steps": []
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"title": "Motivo da Restituição",
+			"subtitles": ["Tipo de Tributo: ITCD"],
+			"components": [
+				{
+					"type": "AlertField",
+					"props": {
+						"type": "warning",
+						"text": "Para inserir vários documentos, use a opção de \"Baixar modelo\". Preencha o modelo e o envie por meio do botão \"Enviar Arquivo .CSV\""
+					}
+				},
+				{
+					"type": "FileUploadField",
+					"props": {
+						"title": "Nº da GUIA de ITCD",
+						"name": "numero-guia-itcd",
+						"accept": ".csv"
+					}
+				},
+				{
+					"type": "FileUploadField",
+					"props": {
+						"title": "Nº dos DAEMS",
+						"name": "numero-daems",
+						"accept": ".csv"
+					}
+				},
+				{
+					"type": "SelectField",
+					"props": {
+						"title": "Descrição do Pedido de Restituição",
+						"name": "descricao-pedido",
+						"data": [
+							{
+								"label": "Pedido de Restituição por pagamento indevido",
+								"value": "pagamento-indevido"
+							},
+							{
+								"label": "Pedido de Restituição por erro de cálculo",
+								"value": "erro-calculo"
+							},
+							{
+								"label": "Pedido de Restituição por duplicidade de pagamento",
+								"value": "duplicidade-pagamento"
+							}
+						]
+					}
+				},
+				{
+					"type": "TextInputField",
+					"props": {
+						"title": "Valor de restituição (R$)",
+						"name": "valor-restituicao",
+						"type": "number",
+						"currency": true,
+						"placeholder": "520,20"
+					}
+				},
+				{
+					"type": "MultiInputField",
+					"props": [
+						{
+							"type": "SelectField",
+							"props": {
+								"title": "Banco",
+								"name": "banco",
+								"data": [
+									{
+										"label": "Banco do Brasil S.A.",
+										"value": "001"
+									},
+									{
+										"label": "Banco Santander (Brasil) S.A.",
+										"value": "033"
+									},
+									{
+										"label": "Banco Inter S.A.",
+										"value": "077"
+									},
+									{
+										"label": "Caixa Econômica Federal",
+										"value": "104"
+									},
+									{
+										"label": "Banco Bradesco S.A.",
+										"value": "237"
+									},
+									{
+										"label": "Nu Pagamentos S.A.",
+										"value": "260"
+									},
+									{
+										"label": "Banco C6 S.A.",
+										"value": "336"
+									},
+									{
+										"label": "Itaú Unibanco S.A.",
+										"value": "341"
+									}
+								]
+							}
+						},
+						{
+							"type": "TextInputField",
+							"props": {
+								"title": "AG",
+								"name": "agencia-bancaria",
+								"mask": "0000-0",
+								"placeholder": "Digite o número da agência"
+							}
+						},
+						{
+							"type": "TextInputField",
+							"props": {
+								"title": "Conta Bancária",
+								"name": "conta-bancaria",
+								"mask": "00000000-0",
+								"placeholder": "Digite o número da conta"
+							}
+						}
+					]
+				},
+				{
+					"type": "TextAreaField",
+					"props": {
+						"placeholder": "Lorem Ipsum x10"
+					}
+				}
+			],
+			"steps": [
+				{
+					"title": "Pedido de Restituição",
+					"subtitles": ["Motivo da Restituição"],
+					"components": [],
+					"steps": [
+						{
+							"title": "Anexar Documentos",
+							"subtitles": [],
+							"components": [
+								{
+									"type": "FileUploadField",
+									"props": {
+										"title": "Comprovante de titularidade bancária dos sujeitos passivos (Formato .pdf)",
+										"name": "titularidade-bancaria-itcd",
+										"accept": ".pdf"
+									}
+								},
+								{
+									"type": "FileUploadField",
+									"props": {
+										"title": "Documentos Pessoais (Formato .pdf)",
+										"name": "documentos-pessoais-itcd",
+										"accept": ".pdf"
+									}
+								},
+								{
+									"type": "FileUploadField",
+									"props": {
+										"title": "Documentos Comprobatórios (Evidências de que a operação ITCD não se concretizou ou foi indevida) (Formato .pdf, .jpeg)",
+										"name": "documentos-comprobatorios",
+										"accept": ".pdf,.jpeg"
+									}
+								},
+								{
+									"type": "FileUploadField",
+									"props": {
+										"title": "Procuração (Formato .pdf, .jpeg)",
+										"name": "procuracao",
+										"accept": ".pdf,.jpeg"
+									}
+								}
+							],
+							"steps": [
+								{
+									"title": "",
+									"subtitles": [],
+									"components": [
+										{
+											"type": "TextDisplayField",
+											"props": {
+												"title": "Resumo da Restituição",
+												"name": "resumo-restituicao"
+											}
+										},
+										{
+											"type": "TextDisplayField",
+											"props": {
+												"title": "Dados Bancários",
+												"name": "dados-bancarios"
+											}
+										},
+										{
+											"type": "TextDisplayField",
+											"props": {
+												"title": "Requerimento",
+												"name": "requerimento"
+											}
+										}
+									],
+									"steps": []
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"title": "Motivo da Restituição",
+			"subtitles": ["Tipo de Tributo: Contribuição"],
+			"components": [
+				{
+					"type": "AlertField",
+					"props": {
+						"type": "warning",
+						"text": "Para inserir vários documentos, use a opção de \"Baixar modelo\". Preencha o modelo e o envie por meio do botão \"Enviar Arquivo .CSV\""
+					}
+				},
+				{
+					"type": "FileUploadField",
+					"props": {
+						"title": "Chave da Nota",
+						"name": "chave-nota",
+						"accept": ".csv"
+					}
+				},
+				{
+					"type": "FileUploadField",
+					"props": {
+						"title": "Nº dos DAEMS",
+						"name": "numero-daems",
+						"accept": ".csv"
+					}
+				},
+				{
+					"type": "TextInputField",
+					"props": {
+						"title": "Valor de restituição (R$)",
+						"name": "valor-restituicao",
+						"type": "number",
+						"currency": true,
+						"placeholder": "520,20"
+					}
+				},
+				{
+					"type": "TextInputField",
+					"props": {
+						"title": "Referência Inicial",
+						"name": "referencia-inicial",
+						"type": "date"
+					}
+				},
+				{
+					"type": "TextInputField",
+					"props": {
+						"title": "Referência Final",
+						"name": "referencia-final",
+						"type": "date"
+					}
+				},
+				{
+					"type": "SelectField",
+					"props": {
+						"title": "Banco",
+						"name": "banco",
+						"data": [
+							{
+								"label": "Banco do Brasil S.A.",
+								"value": "001"
+							},
+							{
+								"label": "Banco Santander (Brasil) S.A.",
+								"value": "033"
+							},
+							{
+								"label": "Banco Inter S.A.",
+								"value": "077"
+							},
+							{
+								"label": "Caixa Econômica Federal",
+								"value": "104"
+							},
+							{
+								"label": "Banco Bradesco S.A.",
+								"value": "237"
+							},
+							{
+								"label": "Nu Pagamentos S.A.",
+								"value": "260"
+							},
+							{
+								"label": "Banco C6 S.A.",
+								"value": "336"
+							},
+							{
+								"label": "Itaú Unibanco S.A.",
+								"value": "341"
+							}
+						]
+					}
+				},
+				{
+					"type": "TextInputField",
+					"props": {
+						"title": "AG",
+						"name": "agencia-bancaria",
+						"mask": "0000-0",
+						"placeholder": "Digite o número da agência"
+					}
+				},
+				{
+					"type": "TextInputField",
+					"props": {
+						"title": "Conta Bancária",
+						"name": "conta-bancaria",
+						"mask": "00000000-0",
+						"placeholder": "Digite o número da conta"
+					}
+				},
+				{
+					"type": "TextAreaField",
+					"props": {
+						"placeholder": "Lorem Ipsum x10"
+					}
+				}
+			],
+			"steps": [
+				{
+					"title": "Pedido de Restituição",
+					"subtitles": ["Motivo da Restituição"],
+					"components": [],
 					"steps": [
 						{
 							"title": "Anexar Documentos",
@@ -229,17 +1828,211 @@
 										"name": "titularidade-bancaria",
 										"accept": ".pdf"
 									}
-								},
+								}
+							],
+							"steps": [
+								{
+									"title": "",
+									"subtitles": [],
+									"components": [
+										{
+											"type": "TextDisplayField",
+											"props": {
+												"title": "Resumo da Restituição",
+												"name": "resumo-restituicao"
+											}
+										},
+										{
+											"type": "TextDisplayField",
+											"props": {
+												"title": "Dados Bancários",
+												"name": "dados-bancarios"
+											}
+										},
+										{
+											"type": "TextDisplayField",
+											"props": {
+												"title": "Requerimento",
+												"name": "requerimento"
+											}
+										}
+									],
+									"steps": []
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"title": "Motivo da Restituição",
+			"subtitles": ["Tipo de Tributo: Taxas"],
+			"components": [
+				{
+					"type": "AlertField",
+					"props": {
+						"type": "warning",
+						"text": "Para inserir vários documentos, use a opção de \"Baixar modelo\". Preencha o modelo e o envie por meio do botão \"Enviar Arquivo .CSV\""
+					}
+				},
+				{
+					"type": "FileUploadField",
+					"props": {
+						"title": "Chave da Nota",
+						"name": "chave-nota",
+						"accept": ".csv"
+					}
+				},
+				{
+					"type": "FileUploadField",
+					"props": {
+						"title": "Nº dos DAEMS",
+						"name": "numero-daems",
+						"accept": ".csv"
+					}
+				},
+				{
+					"type": "TextInputField",
+					"props": {
+						"title": "Valor de restituição (R$)",
+						"name": "valor-restituicao",
+						"type": "number",
+						"currency": true,
+						"placeholder": "520,20"
+					}
+				},
+				{
+					"type": "TextInputField",
+					"props": {
+						"title": "Referência Inicial",
+						"name": "referencia-inicial",
+						"type": "date"
+					}
+				},
+				{
+					"type": "TextInputField",
+					"props": {
+						"title": "Referência Final",
+						"name": "referencia-final",
+						"type": "date"
+					}
+				},
+				{
+					"type": "SelectField",
+					"props": {
+						"title": "Banco",
+						"name": "banco",
+						"data": [
+							{
+								"label": "Banco do Brasil S.A.",
+								"value": "001"
+							},
+							{
+								"label": "Banco Santander (Brasil) S.A.",
+								"value": "033"
+							},
+							{
+								"label": "Banco Inter S.A.",
+								"value": "077"
+							},
+							{
+								"label": "Caixa Econômica Federal",
+								"value": "104"
+							},
+							{
+								"label": "Banco Bradesco S.A.",
+								"value": "237"
+							},
+							{
+								"label": "Nu Pagamentos S.A.",
+								"value": "260"
+							},
+							{
+								"label": "Banco C6 S.A.",
+								"value": "336"
+							},
+							{
+								"label": "Itaú Unibanco S.A.",
+								"value": "341"
+							}
+						]
+					}
+				},
+				{
+					"type": "TextInputField",
+					"props": {
+						"title": "AG",
+						"name": "agencia-bancaria",
+						"mask": "0000-0",
+						"placeholder": "Digite o número da agência"
+					}
+				},
+				{
+					"type": "TextInputField",
+					"props": {
+						"title": "Conta Bancária",
+						"name": "conta-bancaria",
+						"mask": "00000000-0",
+						"placeholder": "Digite o número da conta"
+					}
+				},
+				{
+					"type": "TextAreaField",
+					"props": {
+						"placeholder": "Lorem Ipsum x10"
+					}
+				}
+			],
+			"steps": [
+				{
+					"title": "Pedido de Restituição",
+					"subtitles": ["Motivo da Restituição"],
+					"components": [],
+					"steps": [
+						{
+							"title": "Anexar Documentos",
+							"subtitles": [],
+							"components": [
 								{
 									"type": "FileUploadField",
 									"props": {
-										"title": "Memória de Cálculo Detalhada do Imposto Pago (Formato .xls)",
-										"name": "memoria-detalhada",
-										"accept": ".xls"
+										"title": "Comprovante de Titularidade Bancária (Extrato bancário com Nº da conta e Nº da agência) (Formato .pdf)",
+										"name": "titularidade-bancaria",
+										"accept": ".pdf"
 									}
 								}
 							],
-							"steps": []
+							"steps": [
+								{
+									"title": "",
+									"subtitles": [],
+									"components": [
+										{
+											"type": "TextDisplayField",
+											"props": {
+												"title": "Resumo da Restituição",
+												"name": "resumo-restituicao"
+											}
+										},
+										{
+											"type": "TextDisplayField",
+											"props": {
+												"title": "Dados Bancários",
+												"name": "dados-bancarios"
+											}
+										},
+										{
+											"type": "TextDisplayField",
+											"props": {
+												"title": "Requerimento",
+												"name": "requerimento"
+											}
+										}
+									],
+									"steps": []
+								}
+							]
 						}
 					]
 				}
